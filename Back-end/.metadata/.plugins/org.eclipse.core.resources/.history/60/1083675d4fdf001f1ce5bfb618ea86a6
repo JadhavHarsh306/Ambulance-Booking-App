@@ -1,0 +1,5 @@
+package com.demo.AmbulanceCabService.dao;
+
+public interface UserDao {
+
+}

@@ -1,0 +1,19 @@
+package com.demo.AmbulanceCabService.beans;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class User {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int UserID;
+	private String First_Name;
+	private String Last_Name;
+	private String Email;
+	private String PhoneNo;
+	private String Password;
+}

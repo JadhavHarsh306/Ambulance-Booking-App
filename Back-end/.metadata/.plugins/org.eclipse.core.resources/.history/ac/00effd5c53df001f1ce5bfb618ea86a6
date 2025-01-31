@@ -1,0 +1,9 @@
+package com.demo.AmbulanceCabService.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.demo.AmbulanceCabService.beans.User;
+
+public interface UserDao extends JpaRepository<User, Integer>{
+
+}
