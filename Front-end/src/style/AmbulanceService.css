@@ -1,0 +1,72 @@
+
+.container {
+    padding: 40px;
+  }
+  
+  .header {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    font-weight: 700;
+  }
+  
+  /* Flexbox layout for the cards */
+  .card-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  /* Individual card styling */
+  .card {
+    width: 30%;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-sizing: border-box; /* Added box-sizing to handle padding/borders */
+  }
+  
+  /* Image inside the card */
+  .card img {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Content inside the card */
+  .card-content {
+    padding: 15px;
+  }
+  
+  /* Title styling inside the card */
+  .card-content h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0 0 10px;
+  }
+  
+  /* Description text inside the card */
+  .card-content p {
+    font-size: 14px;
+    margin: 0 0 15px;
+  }
+  
+  /* Button inside the card */
+  .card-content button {
+    background: #000;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .card-content button:hover {
+    background: #444; /* Button hover effect */
+  }
+  
+  

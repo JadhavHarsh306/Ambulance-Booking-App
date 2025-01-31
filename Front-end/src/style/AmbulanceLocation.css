@@ -1,0 +1,74 @@
+    .loc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .loc-header .logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .loc-header .logo i {
+    margin-right: 10px;
+  }
+  
+  .loc-container {
+    display: flex;
+    padding: 20px;
+  }
+  
+  .ride-options {
+    width: 300px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin-right: 20px;
+  }
+  
+  .ride-options h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .ride-options .option {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .ride-options .option i {
+    margin-right: 10px;
+  }
+  
+  .ride-options .option input,
+  .ride-options .option select {
+    border: none;
+    background: none;
+    outline: none;
+    width: 100%;
+  }
+  
+  .ride-options .search-btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .map {
+    flex-grow: 1;
+  }
+  
+  

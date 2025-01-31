@@ -1,0 +1,52 @@
+.business-section {
+  background: #000;
+  color: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.business-content {
+  width: 50%;
+}
+
+.business-content h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 0 0 10px;
+}
+
+.business-content p {
+  font-size: 14px;
+  margin: 0 0 10px;
+}
+
+.business-content a {
+  color: #fff;
+  text-decoration: underline;
+  display: block;
+  margin: 5px 0;
+}
+
+.business-content button {
+  width: 120px;
+  background: #fff;
+  color: #000;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.business-image {
+  width: 45%;
+}
+
+.business-image img {
+  width: 100%;
+  height: auto;
+}
+

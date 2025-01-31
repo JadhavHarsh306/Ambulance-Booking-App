@@ -1,0 +1,76 @@
+.lg-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.login-container .left {
+  flex: 1;
+  background: url('https://placehold.co/400x400') no-repeat center center/cover;
+  border-radius: 10px 0 0 10px;
+}
+
+.login-container .right {
+  flex: 1;
+  padding: 40px;
+}
+
+.login-container .right h2 {
+  margin: 0 0 20px;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.login-container .right form {
+  display: flex;
+  flex-direction: column;
+}
+
+.login-container .right form input {
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.login-container .right form .forgot-password {
+  text-align: right;
+  margin-bottom: 20px;
+}
+
+.login-container .right form .forgot-password a {
+  text-decoration: none;
+  color: #00aaff;
+}
+
+.login-container .right form button {
+  padding: 10px;
+  font-size: 16px;
+  background-color: #00aaff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-container .right .signup {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.login-container .right .signup a {
+  text-decoration: none;
+  color: #00aaff;
+}
