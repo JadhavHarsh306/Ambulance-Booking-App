@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, DirectionsRenderer } from "@react-google-maps/api";
 import "../style/AmbulanceLocation.css";
+import AmbulanceNavbar from "./AmbulanceNavbar";
 
 const containerStyle = {
   width: "100%",
@@ -10,7 +11,6 @@ const containerStyle = {
 
 const defaultLocation = { lat: 28.6139, lng: 77.2090 }; // Default location for testing
 
-// Mapping hospital names to their coordinates (latitude and longitude)
 const hospitalLocations = {
   "Aditya Birla Memorial Hospital": { lat: 18.5340, lng: 73.8271 },
   "Deenanath Mangeshkar Hospital": { lat: 18.5257, lng: 73.8271 },
@@ -42,6 +42,9 @@ const AmbulanceLocation = () => {
   const [duration, setDuration] = useState(null);
   const [directions, setDirections] = useState(null); // Stores route directions
   const [dropoffLocation, setDropoffLocation] = useState(null); // Store dropoff coordinates
+  const [driverLocation, setDriverLocation] = useState(null); // Store driver location after accepting request
+  const [driverInfo, setDriverInfo] = useState(null); // Store driver's info (name & contact)
+  const [rideConfirmed, setRideConfirmed] = useState(false); // Track if ride is confirmed
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -76,14 +79,7 @@ const AmbulanceLocation = () => {
     const hospitalCoords = hospitalLocations[selectedHospital];
 
     if (hospitalCoords) {
-      // Clear the previous dropoff location before setting the new one
-      setDropoffLocation(null);
-      
-
-      // Set the new dropoff location
       setDropoffLocation(hospitalCoords);
-
-      // Recalculate the route to the new hospital
       calculateRoute(hospitalCoords);
     }
   };
@@ -128,8 +124,24 @@ const AmbulanceLocation = () => {
   };
 
   const handleCurrentLocationClick = () => {
-    // When the user clicks on the current location marker, show a pin or alert
     alert(`Current location: ${currentLocation.lat}, ${currentLocation.lng}`);
+  };
+
+  const bookAmbulance = () => {
+    // Simulating a driver accepting the ride request
+    const driver = {
+      name: "John Doe",
+      contact: "+1234567890",
+      location: { lat: 18.5257, lng: 73.8271 }, // Driver's current location (this would be dynamic in real-world)
+    };
+
+    // Notify the user and show driver info on confirmation
+    setDriverLocation(driver.location);
+    setDriverInfo(driver);
+    setRideConfirmed(true);
+
+    // Calculate route to show the distance between the user and driver
+    calculateRoute(driver.location);
   };
 
   if (!isLoaded || loading) {
@@ -143,11 +155,7 @@ const AmbulanceLocation = () => {
 
   return (
     <div>
-      <div className="loc-header">
-        <div className="logo">
-          <i className="fas fa-ambulance"></i> Ambulance Cab Service
-        </div>
-      </div>
+      <AmbulanceNavbar />
 
       <div className="loc-container">
         <div className="ride-options">
@@ -175,7 +183,6 @@ const AmbulanceLocation = () => {
             </select>
           </div>
 
-          {/* Distance & Time Display */}
           {distance && duration && (
             <div className="info-box">
               <p><strong>Distance:</strong> {distance}</p>
@@ -183,8 +190,15 @@ const AmbulanceLocation = () => {
             </div>
           )}
 
-          <button className="search-btn">Find Nearest Hospital</button> <br /> <br />
-          <button className="search-btn">Search Ambulance</button>
+          <button className="search-btn" onClick={bookAmbulance}>Book Ambulance</button>
+
+          {rideConfirmed || driverInfo && (
+            <div className="driver-info">
+              <h3>Driver Confirmed!</h3>
+              <p><strong>Name:</strong> {driverInfo.name}</p>
+              <p><strong>Contact:</strong> {driverInfo.contact}</p>
+            </div>
+          )}
         </div>
 
         <div className="map">
@@ -206,28 +220,35 @@ const AmbulanceLocation = () => {
             <Marker
               position={currentLocation}
               icon={{
-                url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png", // Custom marker for current location
+                url: "https://maps.google.com/mapfiles/ms/icons/red-dot.png",
               }}
-              onClick={handleCurrentLocationClick} // Display a pin or alert when clicked
+              onClick={handleCurrentLocationClick}
             />
 
-            {/* Render Marker for Drop-off location only if a hospital is selected */}
             {dropoffLocation && (
               <Marker
                 position={dropoffLocation}
                 icon={{
-                  url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Custom marker for dropoff
+                  url: "https://maps.google.com/mapfiles/ms/icons/blue-dot.png",
                 }}
               />
             )}
 
-            {/* Show Route */}
+            {driverLocation && (
+              <Marker
+                position={driverLocation}
+                icon={{
+                  url: "https://maps.google.com/mapfiles/ms/icons/green-dot.png",
+                }}
+              />
+            )}
+
             {directions && (
               <DirectionsRenderer
                 directions={directions}
                 options={{
                   polylineOptions: {
-                    strokeColor: "#00008B", // Dark Blue
+                    strokeColor: "#00008B",
                     strokeOpacity: 0.8,
                     strokeWeight: 6,
                   },

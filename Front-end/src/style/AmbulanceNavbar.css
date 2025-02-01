@@ -1,0 +1,18 @@
+.loc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .loc-header .logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .loc-header .logo i {
+    margin-right: 10px;
+  }

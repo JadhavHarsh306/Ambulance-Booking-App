@@ -10,6 +10,9 @@ import AmbulanceLocation from './components/AmbulanceLocation';
 import DriverRegister from './components/DriverRegister';
 import AboutUs from './components/AboutUs';
 import DriverInfo from './components/DriverInfo';
+import Admin from './components/Admin';
+import DriverLocation from './components/DriverLocation';
+
 
 function App() {
     const location = useLocation();
@@ -25,6 +28,9 @@ function App() {
                 <Route path="/driverregister" element={<DriverRegister/>}/>
                 <Route path="/driverinfo" element={<DriverInfo/>}/>
             </Routes>
+            {/* <DriverLocation/> */}
+           
+           
             
         </div>
     );
