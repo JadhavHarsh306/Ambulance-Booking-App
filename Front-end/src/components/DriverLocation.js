@@ -19,7 +19,7 @@ const DriverLocation = () => {
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "YOUR_GOOGLE_MAPS_API_KEY",
+    googleMapsApiKey: "AIzaSyBOjLQjq7Ep6ELWC94_abeTjBgVQoCgL3A",
     libraries: ["places", "geometry", "visualization"],
   });
 

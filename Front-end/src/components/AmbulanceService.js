@@ -1,8 +1,13 @@
 import React from 'react';
+import AmbulanceDriver from './AmbulanceDriver';
+import FAQs from './FAQs';
+import Footer from './Footer'
 import '../style/AmbulanceService.css';
+import { Link } from 'react-router-dom';
 
 const AmbulanceService = () => {
   return (
+    <>
     <div className="container">
       <div className="header">
         <h1>Use the Ambulance Service app to help you in emergencies</h1>
@@ -18,7 +23,7 @@ const AmbulanceService = () => {
           <div className="card-content">
             <h3>Emergency Response</h3>
             <p>Get immediate assistance with our emergency response service, available 24/7.</p>
-           <a href='#req'> <button> Request emergency response</button></a>
+            <Link to='/guestlogin'> <button> Request emergency response</button></Link>
           </div>
         </div>
         <div className="card">
@@ -49,6 +54,10 @@ const AmbulanceService = () => {
         </div>
       </div>
     </div>
+    <AmbulanceDriver/>
+     <FAQs/>
+     <Footer />
+    </>
   );
 };
 

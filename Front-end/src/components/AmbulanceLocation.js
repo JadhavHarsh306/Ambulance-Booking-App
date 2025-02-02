@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, DirectionsRenderer } from "@react-google-maps/api";
+import { Link } from 'react-router-dom';
 import "../style/AmbulanceLocation.css";
 import AmbulanceNavbar from "./AmbulanceNavbar";
 
@@ -190,7 +191,7 @@ const AmbulanceLocation = () => {
             </div>
           )}
 
-          <button className="search-btn" onClick={bookAmbulance}>Book Ambulance</button>
+          <Link to='/driver'><button className="search-btn" onClick={bookAmbulance}>Book Ambulance</button></Link>
 
           {rideConfirmed || driverInfo && (
             <div className="driver-info">
