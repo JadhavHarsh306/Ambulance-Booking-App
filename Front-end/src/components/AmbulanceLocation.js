@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, Marker, DirectionsRenderer } from "@react-google-maps/api";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import "../style/AmbulanceLocation.css";
 import AmbulanceNavbar from "./AmbulanceNavbar";
 
@@ -46,6 +47,8 @@ const AmbulanceLocation = () => {
   const [driverLocation, setDriverLocation] = useState(null); // Store driver location after accepting request
   const [driverInfo, setDriverInfo] = useState(null); // Store driver's info (name & contact)
   const [rideConfirmed, setRideConfirmed] = useState(false); // Track if ride is confirmed
+
+  const navigate = useNavigate();
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -128,22 +131,37 @@ const AmbulanceLocation = () => {
     alert(`Current location: ${currentLocation.lat}, ${currentLocation.lng}`);
   };
 
-  const bookAmbulance = () => {
-    // Simulating a driver accepting the ride request
-    const driver = {
-      name: "John Doe",
-      contact: "+1234567890",
-      location: { lat: 18.5257, lng: 73.8271 }, // Driver's current location (this would be dynamic in real-world)
-    };
+  const bookAmbulance = async () => {
+    if (!dropoffLocation) {
+        alert("Please select a hospital.");
+        return;
+    }
 
-    // Notify the user and show driver info on confirmation
-    setDriverLocation(driver.location);
-    setDriverInfo(driver);
-    setRideConfirmed(true);
+    const userId = localStorage.getItem("userId"); // Assuming userId is stored after login
+    if (!userId) {
+        alert("User not logged in.");
+        return;
+    }
 
-    // Calculate route to show the distance between the user and driver
-    calculateRoute(driver.location);
-  };
+    try {
+      const pickupLocation = `${currentLocation.lat},${currentLocation.lng}`; // F
+        const response = await axios.post("http://localhost:8080/booking/create", null, {
+            params: {
+                userId: userId,
+                pickupLocation: pickupLocation,
+                dropLocation: dropoff
+            }
+        });
+
+        if (response.status === 200) {
+            alert("Booking request sent. Waiting for driver...");
+            navigate("/ridetracking", { state: { bookingId: response.data.bid } }); // Redirect to tracking page
+        }
+    } catch (error) {
+        console.error("Error booking ambulance:", error);
+        alert("Failed to book ambulance. Please try again.");
+    }
+};
 
   if (!isLoaded || loading) {
     return (
@@ -191,7 +209,7 @@ const AmbulanceLocation = () => {
             </div>
           )}
 
-          <Link to='/driver'><button className="search-btn" onClick={bookAmbulance}>Book Ambulance</button></Link>
+          <button className="search-btn" onClick={bookAmbulance}>Book Ambulance</button>
 
           {rideConfirmed || driverInfo && (
             <div className="driver-info">

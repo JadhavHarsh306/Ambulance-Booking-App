@@ -1,5 +1,0 @@
-package com.demo.AmbulanceCabService.service;
-
-public interface UserService {
-
-}

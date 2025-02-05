@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import '../style/RegisterPage.css'; 
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { address } from 'framer-motion/client';
 
 const RegisterPage = () => {
-    const [firstname, setfirstname]=useState("");
-    const [lastname, setlastname]=useState("");
-    const [email, setemail]=useState("");
+    const [name, setname]=useState("");
     const [phone, setphone]=useState("");
+    const [address, setAddress]=useState("");
+    const [email, setemail]=useState("");
     const[password, setpassword]=useState("");
     const[confirmpassword, setconfirmpassword]=useState("");
 
@@ -22,7 +23,7 @@ const RegisterPage = () => {
         }
     
         const userData = {
-            firstname, lastname, email, phone, password
+            name, phone,address, email, password
         };
     
         try {
@@ -49,17 +50,17 @@ const RegisterPage = () => {
                     <img 
                         alt="Ambulance" 
                         height="400" 
-                        src="https://storage.googleapis.com/a1aa/image/SEWBfs9xPF1DfEwin1P2h0YDRAz37wbaOgD4kE8cA4xkEvIUA.jpg" 
+                        src="./images/Ambulance1.jpeg" 
                         width="400" 
                     />
                 </div>
                 <div className="right">
                     <h2>REGISTER</h2>
                     <form onSubmit={handleRegister}>
-                        <input placeholder="First Name" type="text" required value={firstname} onChange={(e)=>setfirstname(e.target.value)}/>
-                        <input placeholder="Last Name" type="text" required value={lastname} onChange={(e)=>setlastname(e.target.value)}/>
-                        <input placeholder="Email" type="email" required value={email} onChange={(e)=>setemail(e.target.value)}/>
-                        <input placeholder="Phone Number" type="text" required value={phone} onChange={(e)=>setphone(e.target.value)}/>
+                        <input placeholder="Name" type="text" required value={name} onChange={(e)=>setname(e.target.value)}/>
+                        <input placeholder="Phone" type="text" required value={phone} onChange={(e)=>setphone(e.target.value)}/>
+                        <input placeholder="Address" type="text" required value={address} onChange={(e)=>setAddress(e.target.value)}/>
+                        <input placeholder="Email ID" type="text" required value={email} onChange={(e)=>setemail(e.target.value)}/>
                         <input placeholder="Password" type="password" required value={password} onChange={(e)=>setpassword(e.target.value)}/>
                         <input placeholder="Confirm Password" type="password" required value={confirmpassword} onChange={(e)=>setconfirmpassword(e.target.value)}/>
                         <button type="submit">Sign Up</button>

@@ -8,24 +8,73 @@ const Login = () => {
     const [password,setpassword]=useState("");
     const navigate=useNavigate();
 
-    const handleLogin=async(e)=>{
+    const handleLogin = async (e) => {
         e.preventDefault();
-        try{
-            console.log("Sending data:", { email, password });
-
-            const response=await axios.post("http://localhost:8080/userAuth",{email,password});
-
-            console.log("Backend Response:", response.data);
-            if(response.data==="Sucess"){
+        console.log("Sending data:", { email, password });
+    
+        try {
+            // Attempt User Login
+            const userResponse = await axios.post("http://localhost:8080/userAuth", { email, password });
+            if (userResponse.status === 200 && userResponse.data.name) {
+                console.log("Logged in as User");
+                localStorage.setItem('userName', userResponse.data.name);  // Store user name
+                localStorage.setItem("userId",userResponse.data.id);
+                console.log("user id:",userResponse.data.id);
                 navigate("/ride");
-            }else{
-                alert("Invalid Credentials");
+                return;
             }
-        }catch (error) {
-            console.error("Login failed:", error);
-            alert("Login failed. Please try again.");
-          }
-    }
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+                console.log("User login failed, trying Admin...");
+            } else {
+                console.error("Unexpected error during User login:", error);
+                alert("Unexpected error. Please try again.");
+                return;
+            }
+        }
+    
+        try {
+            // Attempt Admin Login
+            const adminResponse = await axios.post("http://localhost:8080/adminAuth", { email, password });
+            if (adminResponse.status === 200 && adminResponse.data.name) {
+                console.log("Logged in as Admin");
+                localStorage.setItem('userName', adminResponse.data.name);  // Store admin name
+                navigate("/admin");
+                return;
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+                console.log("Admin login failed, trying Driver...");
+            } else {
+                console.error("Unexpected error during Admin login:", error);
+                alert("Unexpected error. Please try again.");
+                return;
+            }
+        }
+    
+        try {
+            // Attempt Driver Login
+            const driverResponse = await axios.post("http://localhost:8080/driverAuth", { email, password });
+            if (driverResponse.status === 200 && driverResponse.data.name) {
+                console.log("Logged in as Driver");
+                localStorage.setItem('userName', driverResponse.data.name);  // Store driver name
+                navigate("/driver");
+                return;
+            }
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+                console.log("Driver login failed.");
+                alert("Invalid Credentials");
+            } else {
+                console.error("Unexpected error during Driver login:", error);
+                alert("Unexpected error. Please try again.");
+            }
+        }
+    };
+    
+    
+    
+    
     return (
         <div className="lg-container">
             <div className="login-container">

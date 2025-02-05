@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/Guest.css';
+import axios from "axios";
 
 const OtpLogin = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -19,13 +20,25 @@ const OtpLogin = () => {
     }
   };
 
-  const verifyOtp = () => {
+  const verifyOtp = async () => {
     if (enteredOtp === generatedOtp) {
-      setIsLoggedIn(true);
+      try {
+        const response = await axios.post('http://localhost:8080/guestlogin', {
+          phone: phoneNumber,
+        });
+        if (response.status === 200) {
+          alert('Guest user logged in successfully!');
+          navigate("/ride");
+        }
+      } catch (error) {
+        console.error('Error logging in guest user:', error);
+        alert('Failed to log in guest user.');
+      }
     } else {
       alert('Incorrect OTP. Please try again.');
     }
   };
+  
 
   return (
     <div className="otp-container">
