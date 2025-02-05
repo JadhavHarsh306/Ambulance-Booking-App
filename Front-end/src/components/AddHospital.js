@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import AmbulanceNavbar from './AmbulanceNavbar';
-import '../style/Admin.css';
+import '../style/AddHospital.css';
 
 const AddHospital = () => {
     const [hospital, setHospital] = useState({
